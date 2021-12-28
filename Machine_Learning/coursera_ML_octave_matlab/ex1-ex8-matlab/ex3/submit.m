@@ -1,5 +1,5 @@
 function submit()
-  addpath('../lib','../lib/jsonlab');
+  addpath('./lib');
 
   conf.assignmentKey = '2KZRbGlpQnyzVI8Ki4uXjw';
   conf.itemName = 'Multi-class Classification and Neural Networks';
@@ -28,7 +28,6 @@ function submit()
   conf.output = @output;
 
   submitWithConfiguration(conf);
-  rmpath('../lib/jsonlab', '../lib'); 
 end
 
 function out = output(partId, auxdata)
