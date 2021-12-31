@@ -61,17 +61,35 @@ Theta2_grad = zeros(size(Theta2));
 %               the regularization separately and then add them to Theta1_grad
 %               and Theta2_grad from Part 2.
 %
+X = [ones(m, 1) X];
+
+a2 = sigmoid(X * Theta1');
+a2 = [ones(m, 1) a2];
+a3 = sigmoid(a2 * Theta2');
+h = a3;
+
+for i = 1: m
+  temp(i, :) = 1: num_labels;
+endfor
+
+J = -1/m * sum( ( (temp == y).*log(h) + (1 - (temp == y)).*log(1-h) ) (:) ) ...
+    + lambda/(2*m) * ( sum( (Theta1(:, 2:size(Theta1,2) ).^2) (:) ) ...
+    + sum( (Theta2(:, 2:size(Theta2,2) ).^2) (:) ));
 
 
+% Backpropagation
+delta3 = a3' - (temp == y)';
+delta2 = ( Theta2'* delta3 ) .* a2'.*(1 - a2');
+delta2 = delta2(2:end, :);
 
+n1 = size(Theta1, 2);
+n2 = size(Theta2, 2);
 
+Theta1_grad(:,1) = 1/m * (delta2 * X)(:,1);
+Theta1_grad(:,2:n1) = 1/m * (delta2 * X)(:,2:n1) + lambda/m * Theta1(:,2:n1);
 
-
-
-
-
-
-
+Theta2_grad = 1/m * (delta3 * a2)(:,1);
+Theta2_grad(:,2:n2) = 1/m * (delta3 * a2)(:,2:n2) + lambda/m * Theta2(:,2:n2);
 
 
 
