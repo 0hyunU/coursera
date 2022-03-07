@@ -1,5 +1,5 @@
 function submit()
-  addpath('../lib','../lib/jsonlab');
+  addpath('./lib');
 
   conf.assignmentKey = 'gkyVYM98RcWlmQ9s84QNKA';
   conf.itemName = 'Anomaly Detection and Recommender Systems';
@@ -38,7 +38,6 @@ function submit()
   conf.output = @output;
 
   submitWithConfiguration(conf);
-  rmpath('../lib/jsonlab', '../lib');
 end
 
 function out = output(partId, auxstring)
@@ -53,10 +52,10 @@ function out = output(partId, auxstring)
   yval = [R(:) ; 1; 0];
   params = [X(:); Theta(:)];
   if partId == 'WGzrg'
-    [mu, sigma2] = estimateGaussian(X);
+    [mu sigma2] = estimateGaussian(X);
     out = sprintf('%0.5f ', [mu(:); sigma2(:)]);
   elseif partId == '80Tcg'
-    [bestEpsilon, bestF1] = selectThreshold(yval, pval);
+    [bestEpsilon bestF1] = selectThreshold(yval, pval);
     out = sprintf('%0.5f ', [bestEpsilon(:); bestF1(:)]);
   elseif partId == 'KDzSh'
     [J] = cofiCostFunc(params, Y, R, n_u, n_m, ...
