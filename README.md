@@ -2,8 +2,7 @@
 * [Professor Andrew ng. coursera lecture list](https://www.coursera.org/instructor/andrewng)
 * [lecture material](https://vkosuri.github.io/CourseraMachineLearning/)
 
-* octave syntax
-[octave syntax](http://allman84.blogspot.com/2017/07/1_6.html )
+* [octave syntax](http://allman84.blogspot.com/2017/07/1_6.html )
 
 
 ### Homework
